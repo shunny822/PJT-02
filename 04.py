@@ -1,10 +1,23 @@
 import requests
 from pprint import pprint
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def search_movie(title):
     pass
     # 여기에 코드를 작성합니다.
+    url = 'https://api.themoviedb.org/3'
+    path = '/search/movie'
+    parameters = {
+        'api_key': os.getenv('API_KEY'),
+        'query': title,
+        'language': 'ko-KR'
+    }
+
+    find_movie = requests.get(url+path, params = parameters).json()
+    return find_movie['results'][0]['id'] if find_movie['results'] else None
 
 
 # 아래의 코드는 수정하지 않습니다.
